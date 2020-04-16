@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //        _ = CALayer.init()
         
-        let chart = MinuteChart.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 200))
+        let chart = MinuteChart.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 600))
 //        chart.backgroundColor = UIColor.green
         self.view.addSubview(chart)
         

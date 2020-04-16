@@ -94,5 +94,27 @@ extension CGRect {
             return CGPoint.init(x: self.origin.x + self.width, y: self.origin.y + self.height)
         }
     }
+}
+
+extension UIColor {
     
+    static func riseColor() -> UIColor {
+        return UIColor.init(0xFF3F00)
+    }
+    
+    static func fallColor() -> UIColor {
+        return UIColor.init(0x21BC41)
+    }
+    
+    convenience init(_ hex:UInt32) {
+        let r = (hex & 0xFF0000) >> 16
+        let g = (hex & 0x00FF00) >> 8
+        let b = hex & 0x0000FF
+        
+        let red = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue = CGFloat(b) / 255.0
+        
+        self.init(red: red, green: green, blue: blue, alpha: 1)
+    }
 }
