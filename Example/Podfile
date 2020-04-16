@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'GGChart_Swift_Example' do
+  pod 'GGChart_Swift', :path => '../'
+
+  target 'GGChart_Swift_Tests' do
+    inherit! :search_paths
+
+    pod 'Alamofire'
+  end
+end
