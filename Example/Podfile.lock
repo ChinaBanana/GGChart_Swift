@@ -1,23 +1,16 @@
 PODS:
-  - Alamofire (4.9.1)
   - GGChart_Swift (0.1.0)
 
 DEPENDENCIES:
-  - Alamofire
   - GGChart_Swift (from `../`)
-
-SPEC REPOS:
-  trunk:
-    - Alamofire
 
 EXTERNAL SOURCES:
   GGChart_Swift:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   GGChart_Swift: 8b25df50b9ccbf23b448428d4b321addc851da2b
 
-PODFILE CHECKSUM: e912ec2e4f806bf41a3cbec87063739c5326367f
+PODFILE CHECKSUM: 59afa09f5597cc5b6b876d2015cd3170b2103fea
 
 COCOAPODS: 1.9.0

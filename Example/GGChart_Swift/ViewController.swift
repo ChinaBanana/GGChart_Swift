@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GGChart_Swift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,7 +17,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //        _ = CALayer.init()
         
+        let chart = MinuteChart.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 200))
+//        chart.backgroundColor = UIColor.green
+        self.view.addSubview(chart)
         
 //        let tableView = UITableView.init(frame: self.view.bounds, style: .grouped)
 //        tableView.delegate = self
