@@ -107,18 +107,3 @@ public struct RectRender : RenderProtocol {
         context.strokePath()
     }
 }
-
-//extension CGContext {
-//    func drawLine(_ line: Line) -> () {
-//        self.setLineWidth(line.width)
-//        self.setStrokeColor(line.color.cgColor)
-//
-//        if let dash = line.dashPattern {
-//            self.setLineDash(phase: 0, lengths: dash)
-//        }
-//
-//        self.move(to: line.start)
-//        self.addLine(to: line.end)
-//        self.strokePath()
-//    }
-//}

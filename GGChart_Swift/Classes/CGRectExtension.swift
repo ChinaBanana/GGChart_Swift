@@ -13,7 +13,7 @@ public extension UIView {
             self.frame = CGRect.init(x: newValue, y: self.top, width: self.width, height: self.frame.size.height)
         }
         get {
-            return self.frame.origin.x
+            return self.frame.minX
         }
     }
     
@@ -23,7 +23,7 @@ public extension UIView {
         }
         
         get {
-            return self.left + self.width
+            return self.frame.maxX
         }
     }
     
@@ -32,7 +32,7 @@ public extension UIView {
             self.frame = CGRect.init(x: newValue - self.top, y: self.top, width: self.width, height: self.height)
         }
         get {
-            return self.top + self.height
+            return self.frame.maxY
         }
     }
     
@@ -41,7 +41,7 @@ public extension UIView {
             self.frame = CGRect.init(x: self.left, y: newValue, width: self.width, height: newValue)
         }
         get {
-            return self.frame.origin.y
+            return self.frame.minY
         }
     }
     
@@ -50,7 +50,7 @@ public extension UIView {
             self.frame = CGRect.init(x: self.left, y: self.top, width: self.width, height: newValue)
         }
         get {
-            return self.frame.size.height
+            return self.frame.height
         }
     }
     
@@ -59,24 +59,12 @@ public extension UIView {
             self.frame = CGRect.init(x: self.left, y: self.top, width: newValue, height: self.height)
         }
         get {
-            return self.frame.size.width
+            return self.frame.width
         }
     }
 }
 
 extension CGRect {
-    var width: CGFloat {
-        get {
-            return self.size.width
-        }
-    }
-    
-    var height: CGFloat {
-        get {
-            return self.size.height
-        }
-    }
-    
     var rightTopPoint: CGPoint {
         get {
             return CGPoint.init(x: self.origin.x + self.width, y: self.origin.y)
