@@ -19,8 +19,8 @@ public struct Line {
     /// 当前线点长度
     var length: CGFloat {
         get {
-            let w = self.start.x - self.end.x
-            let h = self.end.x - self.end.y
+            let w = start.x - end.x
+            let h = end.x - end.y
             return sqrt(w * w + h * h)
         }
     }
@@ -28,37 +28,37 @@ public struct Line {
     /// 起始点到终点的x距离
     var xLenght: CGFloat {
         get {
-            return CGFloat(self.end.x - self.start.x)
+            return CGFloat(end.x - start.x)
         }
     }
     
     /// 起始点到终点的y距离
     var yLentgh: CGFloat {
         get {
-            return CGFloat(self.end.y - self.start.y)
+            return CGFloat(end.y - start.y)
         }
     }
     
     /// 直线与X轴的弧度 范围 -pi/2 ~ pi/2
     func xCircular() -> CGFloat {
-        return atan2(self.end.y - self.start.y, self.end.x - self.start.x)
+        return atan2(end.y - start.y, end.x - start.x)
     }
     
     /// 直线与Y轴的弧度 范围 -pi/2 ~ pi/2
     func yCircular() -> CGFloat {
-        return atan2(self.end.x - self.start.x, self.end.y - self.start.y)
+        return atan2(end.x - start.x, end.y - start.y)
     }
     
     /// 直线与X轴的弧度 范围：0～pi   0～3.141592653...
     func xArc() -> CGFloat {
-        return self.xCircular() < 0 ? CGFloat.pi * 2 + self.xCircular() : self.xCircular()
+        return xCircular() < 0 ? CGFloat.pi * 2 + xCircular() : xCircular()
     }
     
     /// 直线偏移线
     /// - Parameter move: 偏移量
     func endPointArcMoveX(_ move: CGFloat) -> CGPoint {
-        let base: CGFloat = self.yCircular() > 0 ? 1: -1;
-        return CGPoint.init(x: CGFloat.init(move * base) + self.end.x, y: self.end.y)
+        let base: CGFloat = yCircular() > 0 ? 1: -1;
+        return CGPoint.init(x: CGFloat.init(move * base) + end.x, y: end.y)
     }
     
     /// 获取基于point垂直与直线的点
@@ -66,40 +66,40 @@ public struct Line {
     ///   - point: 任意点
     ///   - radius:点到基准线到距离
     func perpendicular(_ point: CGPoint, radius: CGFloat) -> CGPoint {
-        let m_h = radius * cos(self.xCircular())
-        let m_w = radius * sin(self.xCircular())
+        let m_h = radius * cos(xCircular())
+        let m_w = radius * sin(xCircular())
         return CGPoint.init(x: point.x - CGFloat(m_w), y: point.y + CGFloat(m_h))
     }
     
     /// 从起始点沿直线方向移动一段距离，返回移动后的点
     /// - Parameter move: 移动距离
     func moveFromStart(_ move: CGFloat) -> CGPoint {
-        return CGPoint.init(x: self.start.x + CGFloat(move * cos(self.xCircular())), y: self.start.y + CGFloat(move * sin(self.xCircular())))
+        return CGPoint.init(x: start.x + CGFloat(move * cos(xCircular())), y: start.y + CGFloat(move * sin(xCircular())))
     }
     
     /// 从终点沿直线方向移动一段距离后，返回移动后的点
     /// - Parameter move: 移动距离
     func moveFromEnd(_ move: CGFloat) -> CGPoint {
-        return CGPoint.init(x: self.end.x + CGFloat(move * cos(self.xCircular())), y: self.end.y + CGFloat(move * sin(self.xCircular())))
+        return CGPoint.init(x: end.x + CGFloat(move * cos(xCircular())), y: end.y + CGFloat(move * sin(xCircular())))
     }
     
     /// 偏移x，返回偏移后的点
     /// - Parameter move: 移动距离
     func endPointArcMove(_ move: CGFloat) -> CGPoint {
-        let base: CGFloat = self.yCircular() > 0 ? 1 : -1;
-        return CGPoint.init(x: CGFloat(base * move) + self.end.x, y: self.end.y)
+        let base: CGFloat = yCircular() > 0 ? 1 : -1;
+        return CGPoint.init(x: CGFloat(base * move) + end.x, y: end.y)
     }
     
     /// 移动起始点
     /// - Parameter move: 移动距离
     func moveStart(_ move: CGFloat) -> Line {
-        return Line.init(start: self.moveFromStart(move), end: self.end)
+        return Line.init(start: moveFromStart(move), end: end)
     }
     
     /// 移动终点
     /// - Parameter move: 移动距离
     func moveEnd(_ move: CGFloat) -> Line {
-        return Line.init(start: self.start, end: self.moveFromEnd(move))
+        return Line.init(start: start, end: moveFromEnd(move))
     }
 }
 
@@ -193,18 +193,18 @@ public struct RadiusRange {
     // 获取间距
     var range: CGFloat {
         get {
-            return abs(self.inRadius - self.outRadius)
+            return abs(inRadius - outRadius)
         }
     }
     
     var isZero: Bool {
         get {
-            return self.inRadius == 0 && self.outRadius == 0
+            return inRadius == 0 && outRadius == 0
         }
     }
     
     func containLength(_ length: CGFloat) -> Bool {
-        return length >= self.inRadius && length <= self.outRadius;
+        return length >= inRadius && length <= outRadius;
     }
 }
 
@@ -216,25 +216,25 @@ public struct Pie {
     
     var isEmpty: Bool {
         get {
-            return self.arc == 0 && self.transform == 0 && self.center == CGPoint.zero && self.radiusRange.isZero
+            return arc == 0 && transform == 0 && center == CGPoint.zero && radiusRange.isZero
         }
     }
     
     var minArc: CGFloat {
         get {
-            return self.getLessFloat(self.transform + self.arc, v2: CGFloat.pi)
+            return getLessFloat(transform + arc, v2: CGFloat.pi)
         }
     }
     
     var maxArc: CGFloat {
         get {
-            return self.getLessFloat(self.arc, v2: CGFloat.pi)
+            return getLessFloat(arc, v2: CGFloat.pi)
         }
     }
     
     var yCircular: CGFloat {
         get {
-            let arcLine = ArcLine.init(center: self.center, arc: self.transform + self.arc / 2, leg: self.radiusRange.outRadius)
+            let arcLine = ArcLine.init(center: center, arc: transform + arc / 2, leg: radiusRange.outRadius)
             return Line.lineWithArc(arcLine, clockWise: false).yCircular()
         }
     }
@@ -255,12 +255,10 @@ public struct Pie {
         return changeArc
     }
     
-    
-    
     func containArc(_ arc: CGFloat) -> Bool {
         var pAcr = arc
-        var trans = self.convertArc(self.transform)
-        var maxArc = self.convertArc(self.transform + self.arc)
+        var trans = convertArc(transform)
+        var maxArc = convertArc(transform + arc)
         if trans > maxArc {
             trans = trans > CGFloat.pi ? -(CGFloat.pi * 2 - trans) : trans
             maxArc = maxArc > CGFloat.pi ? -(CGFloat.pi * 2 - maxArc) : maxArc
@@ -270,20 +268,20 @@ public struct Pie {
     }
     
     func containPoint(_ point: CGPoint) -> Bool {
-        let line = Line.init(start: self.center, end: point)
-        return self.radiusRange.containLength(line.length) && self.containArc(line.xArc())
+        let line = Line.init(start: center, end: point)
+        return radiusRange.containLength(line.length) && containArc(line.xArc())
     }
     
     func toAnotherPie(_ toPie: Pie, withProgress: CGFloat) -> Pie {
-        let f_transform = toPie.transform - self.transform
-        let f_arc = toPie.arc - self.arc
-        let f_in = toPie.radiusRange.inRadius - self.radiusRange.inRadius
-        let f_out = toPie.radiusRange.outRadius - self.radiusRange.outRadius
+        let f_transform = toPie.transform - transform
+        let f_arc = toPie.arc - arc
+        let f_in = toPie.radiusRange.inRadius - radiusRange.inRadius
+        let f_out = toPie.radiusRange.outRadius - radiusRange.outRadius
         
-        let n_arc = self.arc + f_arc * withProgress
-        let n_trans = self.transform + f_transform * withProgress
+        let n_arc = arc + f_arc * withProgress
+        let n_trans = transform + f_transform * withProgress
         
-        return Pie.init(center: self.center, radiusRange: RadiusRange.init(inRadius: self.radiusRange.inRadius + f_in * withProgress, outRadius: self.radiusRange.outRadius + f_out * withProgress), arc: n_arc, transform: n_trans)
+        return Pie.init(center: center, radiusRange: RadiusRange.init(inRadius: radiusRange.inRadius + f_in * withProgress, outRadius: radiusRange.outRadius + f_out * withProgress), arc: n_arc, transform: n_trans)
     }
 }
 

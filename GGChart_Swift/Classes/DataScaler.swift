@@ -7,59 +7,118 @@
 
 import Foundation
 
-typealias LineScaler = (CGFloat, CGFloat, CGRect) -> (CGFloat)
-
-protocol ScalarProtocol {
-    var rect: CGRect {set get}
-    var shapeWidth: CGFloat {set get}
-    var shapeInterval: CGFloat {set get}
-    var interval: CGFloat {get}
+public protocol ScalarProtocol {
+    var rect: CGRect { set get }
+    var shapeWidth: CGFloat { set get }
+    var shapeInterval: CGFloat { set get }
+    var interval: CGFloat { get }
 }
 
-class KLineScaler: ScalarProtocol {
-    var rect: CGRect = CGRect.zero
-    var shapeWidth: CGFloat = 2
-    var shapeInterval: CGFloat = 0
+public class KLineScaler: NSObject, ScalarProtocol {
+    public var rect: CGRect = CGRect.zero
+    public var shapeWidth: CGFloat = 5
+    public var shapeInterval: CGFloat = 3
+    public var plainRatio: CGFloat = 0.05  //  留白百分比
     
-    var max: CGFloat = 0
-    var min: CGFloat = 0
-    var xMaxCount: Int = 0
-    
-    var interval: CGFloat {
+    public var max: CGFloat = 1
+    public var min: CGFloat = 0
+    public var xMaxCount: Int = 1
+    public var kShapes = [KShape]()
+    public var interval: CGFloat {
         get {
-            return self.shapeInterval + self.shapeWidth / 2
+            return shapeInterval + shapeWidth / 2
         }
     }
     
     private var objs: Array<KShapeDataProtocol>?
     
-    var kShapes = [KShape]()
-    var klineObjs: Array<KShapeDataProtocol>? {
+    /// 计算价格对应的纵坐标y
+    private func _kFig(value: CGFloat) -> CGFloat {
+        return rect.maxY - (value - min) * (rect.height / (max - min))
+    }
+    
+    public var klineObjs: Array<KShapeDataProtocol>? {
         set (newValue) {
-            self.objs = newValue
-            self .updateKShapes()
+            objs = newValue
+            updateScaler()
         }
         get {
-            return self.objs
+            return objs
         }
     }
     
     var contentSize: CGSize {
         get {
-            return CGSize.init(width: (self.shapeInterval + self.shapeWidth) * CGFloat(self.xMaxCount), height: self.rect.height)
+            return CGSize.init(width: (shapeInterval + shapeWidth) * CGFloat(xMaxCount), height: rect.height)
         }
     }
     
-    private func updateKShapes() -> () {
-        if let arr = self.objs {
-            for i in 0..<arr.count {
-                let x:CGFloat = (CGFloat(i) + 0.5) * self.shapeInterval + (CGFloat(i) + 0.5) * self.shapeWidth
+    public override init() {
+        super.init()
+    }
+    
+    private func updateScaler() -> () {
+        if let arr = objs {
+            configBaseData()
+            kShapes.removeAll();
+            for (i, obj) in arr.enumerated() {
+                let x:CGFloat = (CGFloat(i) + 0.5) * shapeInterval + (CGFloat(i) + 0.5) * shapeWidth
+                let openPoint = CGPoint.init(x: x, y: _kFig(value: obj.open))
+                let closePoint = CGPoint.init(x: x, y: _kFig(value: obj.close))
+                let lowPoint = CGPoint.init(x: x, y: _kFig(value: obj.low))
+                let highPoint = CGPoint.init(x: x, y: _kFig(value: obj.high))
                 
+                let kRect = CGRect.lineDownRectWith(openPoint, end: closePoint, width: shapeWidth)
+                let kshape = KShape.init(top: highPoint, rect: kRect, end: lowPoint)
+                kShapes.append(kshape)
             }
         }
     }
     
-    func updateScalerIn(_ range:NSRange) -> () {
+    public func updateScalerIn(_ range:NSRange) -> () {
+        if let arr = objs {
+            for i in range.location..<(range.location + range.length) {
+                let obj = arr[i]
+                let x:CGFloat = (CGFloat(i) + 0.5) * shapeInterval + (CGFloat(i) + 0.5) * shapeWidth
+                let openPoint = CGPoint.init(x: x, y: _kFig(value: obj.open))
+                let closePoint = CGPoint.init(x: x, y: _kFig(value: obj.close))
+                let lowPoint = CGPoint.init(x: x, y: _kFig(value: obj.low))
+                let highPoint = CGPoint.init(x: x, y: _kFig(value: obj.high))
+                let kRect = CGRect.lineDownRectWith(openPoint, end: closePoint, width: shapeWidth)
+                kShapes[i] = KShape.init(top: highPoint, rect: kRect, end: lowPoint)
+            }
+        }
+    }
+    
+    private func configBaseData() {
+        guard max == 1 && min == 0 else {
+            return
+        }
         
+        if let arr = objs {
+            if let firstObj = arr.first {
+                max = firstObj.high
+                    min = firstObj.low
+                } else {
+                    return
+                }
+                
+                xMaxCount = arr.count
+                for obj in arr {
+                    if max < obj.high {
+                        max = obj.high
+                    }
+                    if min > obj.low {
+                        min = obj.low
+                    }
+                }
+                
+                /// 通过最大值最小值留白上下各 10% 的空间
+//                let abs = max - min
+//                max = max + abs * plainRatio
+//                min = min - abs * plainRatio
+//
+//                rect.size = contentSize
+        }
     }
 }

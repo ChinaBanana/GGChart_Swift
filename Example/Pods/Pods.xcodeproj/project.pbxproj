@@ -17,6 +17,8 @@
 		92457BDCC8D246219C3ED13B742409D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		954C08D40001EC6B2D26AF40B9AC8413 /* Pods-GGChart_Swift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E5233CD12C3200546A7B5A20F0E39FE5 /* Pods-GGChart_Swift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A182E1B9857BD5D29B534D6291F5810D /* GGChart_Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BC7816539E883265F68B5A1B0CB57EF /* GGChart_Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A28878F2244D7A3F003D7F89 /* DayLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28878F1244D7A3F003D7F89 /* DayLineChart.swift */; };
+		A28878F4244D7B3B003D7F89 /* ChartExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28878F3244D7B3B003D7F89 /* ChartExtension.swift */; };
 		A2D2C3A52449399500AC7C48 /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2C3A22449399500AC7C48 /* Axis.swift */; };
 		A2D2C3A62449399500AC7C48 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2C3A32449399500AC7C48 /* Grid.swift */; };
 		A2D2C3A72449399500AC7C48 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2C3A42449399500AC7C48 /* Shapes.swift */; };
@@ -48,7 +50,7 @@
 		0502C63D060A7AE9F5BDADC53E70AEE5 /* Pods-GGChart_Swift_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GGChart_Swift_Example-Info.plist"; sourceTree = "<group>"; };
 		1CE779E6D1724B716FD6C8B7266D74B9 /* GGChart_Swift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "GGChart_Swift-Info.plist"; sourceTree = "<group>"; };
 		1F9580893DA6D5C453BA6E57A316E120 /* Pods-GGChart_Swift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GGChart_Swift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		2A0123C38B349CF5EE2999FD8E3F1DF9 /* CGRectExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CGRectExtension.swift; path = GGChart_Swift/Classes/CGRectExtension.swift; sourceTree = "<group>"; };
+		2A0123C38B349CF5EE2999FD8E3F1DF9 /* CGRectExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
 		2A7B597AC0DE1343E92FDA240F9523E7 /* Pods-GGChart_Swift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GGChart_Swift_Tests.modulemap"; sourceTree = "<group>"; };
 		2FC33698E435762A6D00A2E327FCB8F4 /* Pods-GGChart_Swift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GGChart_Swift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -64,6 +66,8 @@
 		9EA96E286F73309AE07440EC8521C085 /* GGChart_Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GGChart_Swift.debug.xcconfig; sourceTree = "<group>"; };
 		9F099FEA82A04C8C6BE124527D910980 /* Pods-GGChart_Swift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GGChart_Swift_Example-dummy.m"; sourceTree = "<group>"; };
 		9F21298730D3E43A535CE25233503D2E /* Pods-GGChart_Swift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-GGChart_Swift_Example.modulemap"; sourceTree = "<group>"; };
+		A28878F1244D7A3F003D7F89 /* DayLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DayLineChart.swift; path = GGChart_Swift/Classes/DayLineChart.swift; sourceTree = "<group>"; };
+		A28878F3244D7B3B003D7F89 /* ChartExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartExtension.swift; sourceTree = "<group>"; };
 		A2D2C3A22449399500AC7C48 /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		A2D2C3A32449399500AC7C48 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A2D2C3A42449399500AC7C48 /* Shapes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
@@ -170,10 +174,11 @@
 			children = (
 				A2D2C3A12449399500AC7C48 /* Shapes */,
 				6216E0354D4CC7463C9393C7EE1EE861 /* Canvas.swift */,
-				2A0123C38B349CF5EE2999FD8E3F1DF9 /* CGRectExtension.swift */,
+				A28878F5244D85E7003D7F89 /* Extension */,
 				D0F556AA2C5D65F7089A7A966B9A0346 /* Constants.swift */,
 				D5190FA9852CBF1921765F7BDC6055CA /* DataScaler.swift */,
 				F6BE59F4D6D1275832DDE10B1E6BAF2D /* MinuteChart.swift */,
+				A28878F1244D7A3F003D7F89 /* DayLineChart.swift */,
 				D9B0E6BC97644D7E4D2BBF1C43B35147 /* Renderer.swift */,
 				DB2ED5581F248DD8705313EC0B0556AF /* Pod */,
 				6C9CACCE9BB7ADFAD9097E0566F4FC7B /* Support Files */,
@@ -197,6 +202,15 @@
 			);
 			name = "Pods-GGChart_Swift_Example";
 			path = "Target Support Files/Pods-GGChart_Swift_Example";
+			sourceTree = "<group>";
+		};
+		A28878F5244D85E7003D7F89 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2A0123C38B349CF5EE2999FD8E3F1DF9 /* CGRectExtension.swift */,
+				A28878F3244D7B3B003D7F89 /* ChartExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		A2D2C3A12449399500AC7C48 /* Shapes */ = {
@@ -409,6 +423,8 @@
 				F29495C34F25947F3C3AE648C42637A1 /* MinuteChart.swift in Sources */,
 				A2D2C3A72449399500AC7C48 /* Shapes.swift in Sources */,
 				2AD48AF23AD895FC2CBA259C7D16C5E6 /* Renderer.swift in Sources */,
+				A28878F2244D7A3F003D7F89 /* DayLineChart.swift in Sources */,
+				A28878F4244D7B3B003D7F89 /* ChartExtension.swift in Sources */,
 				A2D2C3A62449399500AC7C48 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

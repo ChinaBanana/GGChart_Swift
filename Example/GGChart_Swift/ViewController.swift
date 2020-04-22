@@ -19,25 +19,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //        _ = CALayer.init()
         
-        let chart = MinuteChart.init(frame: CGRect.init(x: 0, y: 100, width: self.view.frame.size.width, height: 600))
+        let chart = DayLineChart.init(frame: CGRect.init(x: 0, y: 100, width: view.frame.width, height: 300))
 //        chart.backgroundColor = UIColor.green
-        self.view.addSubview(chart)
+        view.addSubview(chart)
         
-//        let tableView = UITableView.init(frame: self.view.bounds, style: .grouped)
+        let kLineScale = KLineScaler.init()
+        kLineScale.shapeWidth = 10
+        kLineScale.shapeInterval = 3
+        
+        let bundle = Bundle.main.path(forResource: "600887_kdata", ofType: "json")
+        if let path = bundle {
+            let data = NSData.init(contentsOfFile: path)!
+             
+            let decoder = JSONDecoder()
+            if let models = try? decoder.decode(Array<KLineData>.self, from: data as Data) {
+                chart.updateContentsWith(models)
+            }
+        }
+        
+       
+        
+//        let tableView = UITableView.init(frame: view.bounds, style: .grouped)
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        self.view .addSubview(tableView);
+//        view .addSubview(tableView);
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath);
-        cell.textLabel?.text = self.disyplayContents[indexPath.row]
+        cell.textLabel?.text = disyplayContents[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.disyplayContents.count
+        return disyplayContents.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

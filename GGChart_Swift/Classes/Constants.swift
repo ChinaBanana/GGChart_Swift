@@ -8,18 +8,15 @@
 import Foundation
 
 /// k 线数据协议
-protocol KShapeDataProtocol {
-    var low:CGFloat {get}
+public protocol KShapeDataProtocol {
+    var low: CGFloat {get}
     var high: CGFloat {get}
     var open: CGFloat {get}
     var close: CGFloat {get}
 }
 
 enum Constants {
-    public static let lineWidth = CGFloat(1 / UIScreen.main.scale)
-    
-    public static let fontKey: String = "NSAttributeFontKey"
-    public static let foregroundColorKey: String = "NSForegroundColorKey"
+    public static let lineWidth = CGFloat(0.25)
 }
 
 enum TextRatio {
