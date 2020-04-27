@@ -7,12 +7,18 @@
 
 import Foundation
 
-public class Canvas: CALayer {
+protocol CavansProtocol {
+    var renders: Array<RenderProtocol> { set get }
+}
+
+public class Canvas: CALayer, CavansProtocol {
     
     public var renders: Array<RenderProtocol> = []
     
     override init() {
         super.init()
+        contentsScale = UIScreen.main.scale
+        masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -20,13 +26,15 @@ public class Canvas: CALayer {
     }
     
     override public func draw(in ctx: CGContext) {
-        ctx.saveGState()
+        
         super.draw(in: ctx)
+        ctx.saveGState()
         
         for obj in renders {
             obj.darwInContext(ctx)
         }
         
         ctx.restoreGState()
+        ctx.flush()
     }
 }

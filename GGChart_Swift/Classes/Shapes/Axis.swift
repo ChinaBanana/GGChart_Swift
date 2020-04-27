@@ -110,19 +110,22 @@ extension Axis : RenderProtocol {
         
         /// 绘制文字内容
         if showText {
-            UIGraphicsPushContext(context)
             if let texts = aryStrings {
-                
+                UIGraphicsPushContext(context)
                 let l_cir = line.xCircular()
                 let cir = l_cir > (CGFloat.pi / 2) ? l_cir - (CGFloat.pi / 2) : l_cir
                 
+                context.setTextDrawingMode(CGTextDrawingMode.fillStroke)
+                context.setAllowsFontSmoothing(true)
+                context.setShouldSmoothFonts(true)
+                
                 for (i, text) in texts.enumerated() {
-                    let nsStr = text as NSString
                     
                     guard i < endArr.count else {
                         return
                     }
                     
+                    let nsStr = NSString.init(string: text)
                     var point = endArr[i]
                     let size = nsStr.size(withAttributes: textParam)
                     
@@ -133,13 +136,14 @@ extension Axis : RenderProtocol {
                     }
                     
                     point = CGPoint.init(x: point.x + size.width * ratioP.x, y: point.y + size.height * ratioP.y)
-                    
                     if drawAtIndex(i) {
+                        context.setAllowsFontSmoothing(true)
+                        context.setShouldSmoothFonts(true)
                         nsStr.draw(at: point, withAttributes: textParam)
                     }
-                }
+                }  
+                UIGraphicsPopContext()
             }
-            UIGraphicsPopContext()
         }
     }
 }

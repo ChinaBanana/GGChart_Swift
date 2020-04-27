@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //        _ = CALayer.init()
         
-        let chart = DayLineChart.init(frame: CGRect.init(x: 0, y: 100, width: view.frame.width, height: 300))
+        let chart = KLineChart.init(frame: CGRect.init(x: 0, y: 100, width: view.frame.width, height: 300))
 //        chart.backgroundColor = UIColor.green
         view.addSubview(chart)
         

@@ -16,7 +16,7 @@ public protocol KShapeDataProtocol {
 }
 
 enum Constants {
-    public static let lineWidth = CGFloat(0.25)
+    public static let lineWidth = CGFloat(1 / UIScreen.main.scale)
 }
 
 enum TextRatio {
